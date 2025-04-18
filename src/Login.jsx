@@ -47,9 +47,20 @@ export default function Login() {
         });
     }
 
-    const fetchMatchingUser = async () => {
-        return true;
+   const fetchMatchingUser = () => {
+        return axios.post('http://localhost:8004/test/matchingUser', {
+            'email': email,
+            'pwd': pw
+        }, {
+            headers: { 'Content-Type': 'application/json' }
+        }).then((response) => response.data)
+            .catch((error) => {
+                console.error('Error fetching data:', error);
+                return false;
+            });
+       
     }
+
 
     useEffect(() => {
         if (emailValid && pwValid) {
